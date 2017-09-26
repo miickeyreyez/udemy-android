@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity
 {
 
     private Button btnPermisions;
+    private Button btnIntentImplicito;
     private SeekBar seekBarAge;
     private TextView textViewAge;
     private RadioButton radioButtonGreeter;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Botón para intent implicito
+        btnIntentImplicito = (Button) findViewById(R.id.btnIntentImplicito);
         btnPermisions = (Button) findViewById(R.id.btnPermissions);
 
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -53,6 +56,15 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        //Botón para intent implicito
+        btnIntentImplicito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent implicito = new Intent(MainActivity.this,ImplicitoActivity.class);
+                implicito.putExtra("saludo","Este es un ejemplo de intent implicito");
+                startActivity(implicito);
+            }
+        });
         //Botón para verificar los permisos de android
         btnPermisions.setOnClickListener(new View.OnClickListener()
         {
