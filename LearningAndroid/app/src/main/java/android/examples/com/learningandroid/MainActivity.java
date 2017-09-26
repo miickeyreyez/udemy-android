@@ -1,9 +1,17 @@
 package android.examples.com.learningandroid;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,39 +23,44 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity
-{
+public class MainActivity extends AppCompatActivity {
 
     private Button btnPermisions;
     private Button btnIntentImplicito;
+    private Button btnIntentExplicito;
     private SeekBar seekBarAge;
     private TextView textViewAge;
     private RadioButton radioButtonGreeter;
     private RadioButton radioButtonFarewell;
 
-    private String name = "";
     private int age = 18;
     private final int MAX_AGE = 60;
     private final int MIN_AGE = 16;
+
+    Intent intent;
 
     // Para compartir
     public static final int GREETER_OPTION = 1;
     public static final int FAREWELL_OPTION = 2;
 
+    private static Context context = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        context = this;
+
         //Botón para intent implicito
         btnIntentImplicito = (Button) findViewById(R.id.btnIntentImplicito);
+        //Botón para intent explícito
+        btnIntentExplicito = (Button) findViewById(R.id.btnIntentExplicito);
         btnPermisions = (Button) findViewById(R.id.btnPermissions);
 
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,11 +73,31 @@ public class MainActivity extends AppCompatActivity
         btnIntentImplicito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent implicito = new Intent(MainActivity.this,ImplicitoActivity.class);
-                implicito.putExtra("saludo","Este es un ejemplo de intent implicito");
+                Intent implicito = new Intent(MainActivity.this, ImplicitoActivity.class);
+                implicito.putExtra("saludo", "Este es un ejemplo de intent implicito");
                 startActivity(implicito);
             }
         });
+
+        //Botón para intent explícito
+        btnIntentExplicito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent explicito = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+"555555"));
+                //Verificar si la versión de Android es igual o superior a Marshallow
+                intent = explicito;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                {
+                    //El código 100 es Phone Call
+                    requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 100);
+                }
+                else
+                {
+                    olderVersions();
+                }
+            }
+        });
+
         //Botón para verificar los permisos de android
         btnPermisions.setOnClickListener(new View.OnClickListener()
         {
@@ -138,6 +171,55 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //Se sobreescribe el resultado de la verificación de permisos
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        switch (requestCode)
+        {
+            case 100:
+                String permission = permissions[0];
+                int result = grantResults[0];
+                if (permission.equals(Manifest.permission.CALL_PHONE))
+                {
+                    if (result == PackageManager.PERMISSION_GRANTED)
+                    {
+                        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
+                            return;
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        Intent i = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        i.addCategory(Intent.CATEGORY_DEFAULT);
+                        i.setData(Uri.parse("package:" + getPackageName()));
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                        startActivity(i);
+                        Toast.makeText(MainActivity.this,"Permission denied",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+                break;
+        }
+    }
+
+    private boolean CheckPermissions(String permission)
+    {
+        int result = this.checkCallingOrSelfPermission(permission);
+        return result == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void olderVersions() {
+        if (CheckPermissions(Manifest.permission.CALL_PHONE))
+            startActivity(intent);
+        else
+            Toast.makeText(MainActivity.this, "Permission denied", Toast.LENGTH_SHORT).show();
     }
 
 }

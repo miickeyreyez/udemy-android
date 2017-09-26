@@ -169,6 +169,6 @@ public class PermissionActivity extends AppCompatActivity {
     private boolean CheckPermissions(String permission)
     {
         int result = this.checkCallingOrSelfPermission(permission);
-            return result == PackageManager.PERMISSION_GRANTED;
+        return result == PackageManager.PERMISSION_GRANTED;
     }
 }
