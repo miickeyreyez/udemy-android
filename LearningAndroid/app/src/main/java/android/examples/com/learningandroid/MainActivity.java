@@ -23,7 +23,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
 
     private Button btnPermisions;
     private Button btnIntentImplicito;
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private static Context context = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -192,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else
                     {
+                        //Abrir intent con settings de la aplicación
                         Intent i = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                         i.addCategory(Intent.CATEGORY_DEFAULT);
                         i.setData(Uri.parse("package:" + getPackageName()));
@@ -215,7 +218,8 @@ public class MainActivity extends AppCompatActivity {
         return result == PackageManager.PERMISSION_GRANTED;
     }
 
-    private void olderVersions() {
+    private void olderVersions()
+    {
         if (CheckPermissions(Manifest.permission.CALL_PHONE))
             startActivity(intent);
         else

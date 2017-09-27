@@ -12,12 +12,14 @@ import android.widget.TextView;
  * Created by angel on 25/09/17.
  */
 
-public class ImplicitoActivity extends AppCompatActivity {
+public class ImplicitoActivity extends AppCompatActivity
+{
 
     TextView texto;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.implicito_activity);

@@ -14,7 +14,9 @@
         tools:layout_editor_absoluteY="8dp">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/imageButtonTelefono"
+            android:background="@null"
+            android:tint="@color/colorPrimaryDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@android:drawable/stat_sys_speakerphone"
@@ -24,42 +26,154 @@
             android:layout_marginTop="54dp" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/editTextTelefono"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageButton"
+            android:layout_alignBottom="@+id/imageButtonTelefono"
             android:layout_marginStart="11dp"
-            android:layout_toEndOf="@+id/imageButton"
+            android:layout_toEndOf="@+id/imageButtonTelefono"
             android:ems="10"
             android:inputType="number" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/imageButtonBrowser"
+            android:background="@null"
+            android:tint="@color/colorPrimaryDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@android:drawable/ic_dialog_email"
-            android:layout_below="@+id/imageButton"
-            android:layout_alignStart="@+id/imageButton"
+            app:srcCompat="@android:drawable/stat_notify_chat"
+            android:layout_below="@+id/imageButtonTelefono"
+            android:layout_alignStart="@+id/imageButtonTelefono"
             android:layout_marginTop="45dp"
-            android:layout_toStartOf="@+id/editText" />
+            android:layout_toStartOf="@+id/editTextTelefono" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/editTextBrowser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageButton2"
-            android:layout_alignStart="@+id/editText"
+            android:layout_alignBottom="@+id/imageButtonBrowser"
+            android:layout_alignStart="@+id/editTextTelefono"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="" />
 
-        <ImageButton
-            android:id="@+id/imageButton3"
+        <TextView
+            android:id="@+id/textViewContactos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editText2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="56dp"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
+            android:layout_marginTop="20dp"
+            android:text="Contactos"
+            android:layout_below="@+id/editTextBrowser"
+            android:layout_centerHorizontal="true" />
+
+        <ImageButton
+            android:id="@+id/imageButtonContacts"
+            android:background="@null"
+            android:tint="@color/colorPrimaryDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/stat_notify_missed_call"
+            android:layout_alignTop="@+id/textViewContactos"
+            android:layout_alignStart="@+id/imageButtonBrowser"
+            android:layout_alignEnd="@+id/imageButtonCorreo" />
+
+        <TextView
+            android:id="@+id/textViewCorreo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Correo"
+            android:layout_below="@+id/textViewContactos"
+            android:layout_centerHorizontal="true" />
+
+        <ImageButton
+            android:id="@+id/imageButtonCorreo"
+            android:background="@null"
+            android:tint="@color/colorPrimaryDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/sym_action_email"
+            android:layout_alignTop="@+id/textViewCorreo"
+            android:layout_alignStart="@+id/imageButtonBrowser" />
+
+        <TextView
+            android:id="@+id/textViewCorreo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Correo 2"
+            android:layout_below="@+id/textViewCorreo"
+            android:layout_centerHorizontal="true" />
+
+        <ImageButton
+            android:id="@+id/imageButtonCorreo2"
+            android:background="@null"
+            android:tint="@color/colorPrimaryDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/sym_action_email"
+            android:layout_alignTop="@+id/textViewCorreo2"
+            android:layout_alignStart="@+id/imageButtonBrowser" />
+
+        <TextView
+            android:id="@+id/textViewCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Camara"
+            android:layout_below="@+id/textViewCorreo2"
+            android:layout_centerHorizontal="true" />
+
+        <ImageButton
+            android:id="@+id/imageButtonCamera"
+            android:background="@null"
+            android:tint="@color/colorPrimaryDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_menu_camera"
+            android:layout_alignTop="@+id/textViewCamera"
+            android:layout_alignStart="@+id/imageButtonCorreo2" />
+
+        <TextView
+            android:id="@+id/textViewTelefono2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Teléfono 2"
+            android:layout_below="@+id/textViewCamera"
+            android:layout_centerHorizontal="true" />
+
+        <ImageButton
+            android:id="@+id/imageButtonTelefono2"
+            android:background="@null"
+            android:tint="@color/colorPrimaryDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/stat_sys_phone_call"
+            android:layout_alignTop="@+id/textViewTelefono2"
+            android:layout_alignStart="@+id/imageButtonCamera"
+            android:layout_alignEnd="@+id/imageButtonCorreo2" />
+
+        <TextView
+            android:id="@+id/textViewTelefono3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Teléfono 3"
+            android:layout_below="@+id/textViewTelefono2"
+            android:layout_centerHorizontal="true" />
+
+        <ImageButton
+            android:id="@+id/imageButtonTelefono3"
+            android:background="@null"
+            android:tint="@color/colorPrimaryDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/stat_sys_phone_call"
+
+            android:layout_alignTop="@+id/textViewTelefono3"
+            android:layout_alignStart="@+id/imageButtonTelefono2"
+            android:layout_toStartOf="@+id/editTextBrowser" />
+
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

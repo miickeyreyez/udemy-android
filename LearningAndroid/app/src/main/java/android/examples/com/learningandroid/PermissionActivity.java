@@ -18,25 +18,38 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class PermissionActivity extends AppCompatActivity {
+
     private EditText editTextPhone;
     private EditText editTextBrowser;
     private ImageButton imageButtonPhone;
     private ImageButton imageButtonBrowser;
     private ImageButton imageButtonCamera;
+    private ImageButton imageButtonContacts;
+    private ImageButton imageButtonMail;
+    private ImageButton imageButtonMail2;
+    private ImageButton imageButtonTelefono2;
+    private ImageButton imageButtonTelefono3;
     private String phoneNumber;
     private Intent intentCall;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permission);
 
-        editTextPhone = (EditText) findViewById(R.id.editText);
-        editTextBrowser = (EditText) findViewById(R.id.editText2);
-        imageButtonPhone = (ImageButton) findViewById(R.id.imageButton);
-        imageButtonBrowser = (ImageButton) findViewById(R.id.imageButton2);
-        imageButtonCamera = (ImageButton) findViewById(R.id.imageButton3);
+        editTextPhone = (EditText) findViewById(R.id.editTextTelefono);
+        editTextBrowser = (EditText) findViewById(R.id.editTextBrowser);
+        imageButtonPhone = (ImageButton) findViewById(R.id.imageButtonTelefono);
+        imageButtonBrowser = (ImageButton) findViewById(R.id.imageButtonBrowser);
+        imageButtonCamera = (ImageButton) findViewById(R.id.imageButtonCamera);
+        imageButtonContacts = (ImageButton) findViewById(R.id.imageButtonContacts);
+        imageButtonMail = (ImageButton) findViewById(R.id.imageButtonCorreo);
+        imageButtonMail2 = (ImageButton) findViewById(R.id.imageButtonCorreo2);
+        imageButtonTelefono2 = (ImageButton) findViewById(R.id.imageButtonTelefono2);
+        imageButtonTelefono3 = (ImageButton) findViewById(R.id.imageButtonTelefono3);
+
 
         //Forzar y cargar icono en el action bar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -45,12 +58,15 @@ public class PermissionActivity extends AppCompatActivity {
         //Activar flecha ir atrás
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        imageButtonPhone.setOnClickListener(new View.OnClickListener() {
+        imageButtonPhone.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 phoneNumber = editTextPhone.getText().toString();
                 intentCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));
-                if (phoneNumber != null) {
+                if (phoneNumber != null)
+                {
                     //Verificar si la versión de Android es igual o superior a Marshallow
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
                         requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 100);
@@ -59,7 +75,8 @@ public class PermissionActivity extends AppCompatActivity {
                 }
             }
 
-            private void olderVersions() {
+            private void olderVersions()
+            {
                 if (CheckPermissions(Manifest.permission.CALL_PHONE))
                     startActivity(intentCall);
                 else
@@ -67,45 +84,97 @@ public class PermissionActivity extends AppCompatActivity {
             }
         });
 
-        imageButtonBrowser.setOnClickListener(new View.OnClickListener() {
+        imageButtonBrowser.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 String url = editTextBrowser.getText().toString();
-                if (url != null || !url.isEmpty()) {
-                    /*Intent intent = new Intent();
+                if (url != null || !url.isEmpty())
+                {
+                    /*
+                    Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse("http://" + url));
                     */
-                    //Intent para abrir el browser: Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://" + url));
-                    //Intent para abrir contactos: Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("content://contacts/people"));
-                    //Intent para el envío de correo: Intent intent = new Intent(Intent.ACTION_SENDTO,Uri.parse("mailto:" + "isc.angelreyes@gmail.com"));
-                    //Intent para el email completo:
-                    /*Intent intent = new Intent(Intent.ACTION_SEND);
-                    intent.setType("plain/text");
-                    intent.putExtra(Intent.EXTRA_SUBJECT,"Subject");
-                    intent.putExtra(Intent.EXTRA_TEXT,"Mensaje de prueba");
-                    intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"maxr@praxis.com.mx","miickeyreyez@gmail.com"});
-                    startActivity(Intent.createChooser(intent,"Elige el cliente de correo"));
-                    */
-                    //Intent para hacer una llamada --> Primero se debe verificar que tenga permisos
-                    /*Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "5531327501"));
-                    if (ActivityCompat.checkSelfPermission(PermissionActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        return;
-                    }
-                    */
-                    //Intent para el teléfono sin solicitar permisos
-                    Intent intent = new Intent(Intent.ACTION_DIAL,Uri.parse("tel:5531327501"));
+                    //Intent para abrir el browser:
+                    Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://" + url));
                     startActivity(intent);
                 }
             }
         });
 
-        imageButtonCamera.setOnClickListener(new View.OnClickListener() {
+        imageButtonContacts.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
+                //Intent para abrir contactos:
+                Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("content://contacts/people"));
+                startActivity(intent);
+            }
+        });
+
+        imageButtonMail.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                //Intent para el envío de correo:
+                Intent intent = new Intent(Intent.ACTION_SENDTO,Uri.parse("mailto:" + "isc.angelreyes@gmail.com"));
+                startActivity(intent);
+            }
+        });
+
+        imageButtonMail2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                //Intent para el email completo:
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("plain/text");
+                intent.putExtra(Intent.EXTRA_SUBJECT,"Subject");
+                intent.putExtra(Intent.EXTRA_TEXT,"Mensaje de prueba");
+                intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"maxr@praxis.com.mx","miickeyreyez@gmail.com"});
+                startActivity(Intent.createChooser(intent,"Elige el cliente de correo"));
+            }
+        });
+
+        imageButtonCamera.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
                 //Intent para abrir camara
                 Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
                 startActivityForResult(intent,50);
+            }
+        });
+
+        imageButtonTelefono2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                //Intent para hacer una llamada --> Primero se debe verificar que tenga permisos
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "55"));
+                if (ActivityCompat.checkSelfPermission(PermissionActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
+                {
+                        return;
+                }
+                startActivity(intent);
+            }
+        });
+
+        imageButtonTelefono3.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                //Intent para el teléfono sin solicitar permisos
+                Intent intent = new Intent(Intent.ACTION_DIAL,Uri.parse("tel:5555"));
+                startActivity(intent);
             }
         });
     }
@@ -130,6 +199,7 @@ public class PermissionActivity extends AppCompatActivity {
                 super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
     //Se sobreescribe el resultado de la verificación de permisos
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
