@@ -116,13 +116,39 @@ public class MainActivity extends AppCompatActivity
         textViewAge = (TextView) findViewById(R.id.textView2);
         radioButtonGreeter = (RadioButton) findViewById(R.id.radioButton);
         radioButtonFarewell = (RadioButton) findViewById(R.id.radioButton2);
+        radioButtonGreeter.setChecked(true);
+
+        //Evento para detectar cambios en los radio buttons
+        radioButtonGreeter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radioButtonFarewell.setChecked(false);
+            }
+        });
+
+        radioButtonFarewell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radioButtonGreeter.setChecked(false);
+                textViewAge.setText("Age: 18");
+            }
+        });
 
         // Evento change para el SeekBar
         seekBarAge.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int currentAge, boolean b) {
                 age = currentAge;
-                textViewAge.setText(age + "");
+                if(radioButtonGreeter.isChecked())
+                {
+                    radioButtonFarewell.setChecked(false);
+                    textViewAge.setText("Edad: " + age + "");
+                }
+                else
+                {
+                    radioButtonGreeter.setChecked(false);
+                    textViewAge.setText("Age: " + age + "");
+                }
             }
 
             @Override
@@ -135,15 +161,29 @@ public class MainActivity extends AppCompatActivity
             public void onStopTrackingTouch(SeekBar seekBar) {
                 // Declaramos nuestras restricciones de edad en el evento en que el usuario suelta/deja el seekbar.
                 age = seekBar.getProgress();
-                textViewAge.setText(age + "");
+                if(radioButtonGreeter.isChecked())
+                {
+                    radioButtonFarewell.setChecked(false);
+                    textViewAge.setText("Edad: " + age + "");
+                }
+                else
+                {
+                    radioButtonGreeter.setChecked(false);
+                    textViewAge.setText("Age: " + age + "");
+                }
 
-                if (age > MAX_AGE) {
+                if (age > MAX_AGE)
+                {
                     btnPermisions.setVisibility(View.INVISIBLE);
-                    Toast.makeText(MainActivity.this, "The max age allowed is: "+MAX_AGE+" years old.", Toast.LENGTH_LONG).show();
-                } else if (age < MIN_AGE) {
+                    Toast.makeText(MainActivity.this, "The max age allowed is: " + MAX_AGE + " years old.", Toast.LENGTH_LONG).show();
+                }
+                else if (age < MIN_AGE)
+                {
                     btnPermisions.setVisibility(View.INVISIBLE);
-                    Toast.makeText(MainActivity.this, "The min age allowed is: "+MIN_AGE+" years old.", Toast.LENGTH_LONG).show();
-                } else {
+                    Toast.makeText(MainActivity.this, "The min age allowed is: " + MIN_AGE + " years old.", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
                     btnPermisions.setVisibility(View.VISIBLE);
                 }
             }

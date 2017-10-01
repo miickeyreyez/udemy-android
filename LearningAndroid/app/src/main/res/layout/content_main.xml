@@ -59,10 +59,11 @@
         android:id="@+id/seekBar"
         android:layout_width="232dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/btnPermissions"
-        android:layout_toEndOf="@+id/textView"
-        android:layout_marginTop="181dp"
-        android:progress="18"/>
+        android:layout_marginTop="60dp"
+        android:progress="18"
+        android:layout_below="@+id/radioButton2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="46dp" />
 
     <RadioButton
         android:id="@+id/radioButton"
@@ -71,23 +72,26 @@
         android:layout_below="@+id/btnPermissions"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="47dp"
-        android:text="RadioButton" />
+        android:text="Español" />
 
     <RadioButton
         android:id="@+id/radioButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/radioButton"
-        android:layout_below="@+id/radioButton"
         android:layout_marginTop="13dp"
-        android:text="RadioButton" />
+        android:text="Inglés"
+        android:layout_below="@+id/radioButton"
+        android:layout_alignStart="@+id/radioButton" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:text="Edad: 18"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_below="@+id/seekBar"
-        android:layout_marginTop="32dp"
-        android:text="18" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
