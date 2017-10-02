@@ -20,6 +20,7 @@
         <activity android:name=".ListActivity"></activity>
         <activity android:name=".BasicListActivity"></activity>
         <activity android:name=".BasicGridActivity"></activity>
+        <activity android:name=".FruitActivity"></activity>
     </application>
 
 </manifest>
