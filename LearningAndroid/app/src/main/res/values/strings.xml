@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Intents</string>
+    <string name="app_name">Udemy - Intents</string>
     <string name="action_settings">Settings</string>
     <string name="permissionsButton">Intent con permisos</string>
     <string name="intentImplicito">Intent implícito</string>
