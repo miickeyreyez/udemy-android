@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".GridActivity" />
         <activity android:name=".ListActivity"></activity>
+        <activity android:name=".BasicListActivity"></activity>
+        <activity android:name=".BasicGridActivity"></activity>
     </application>
 
 </manifest>

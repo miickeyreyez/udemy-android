@@ -5,17 +5,39 @@
     android:layout_height="match_parent">
 
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="26dp"
+        android:text="@string/app_name" />
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnBasic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Basic List View" />
+
+    <Button
+        android:id="@+id/btnList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="List View" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnBasicGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Basic Grid View" />
+
+    <Button
+        android:id="@+id/btnGrid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Grid View" />
+
 </LinearLayout>

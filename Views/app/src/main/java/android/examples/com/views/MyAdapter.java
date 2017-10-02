@@ -10,13 +10,16 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class MyAdapter extends BaseAdapter {
+public class MyAdapter extends BaseAdapter
+{
 
     private Context context;
     private int layout;
     private List<String> nombres;
 
-    public MyAdapter(Context context, int layout, List<String> nombres){
+    //Constructor
+    public MyAdapter(Context context, int layout, List<String> nombres)
+    {
         this.context = context;
         this.layout = layout;
         this.nombres = nombres;
@@ -38,7 +41,10 @@ public class MyAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, ViewGroup viewGroup)
+    {
+
+        //Necesitamos un view holder para mantener la vista siempre
         ViewHolder holder;
 
         if(view == null)
@@ -49,6 +55,7 @@ public class MyAdapter extends BaseAdapter {
             holder.nameTextView = (TextView) view.findViewById(R.id.textView);
             view.setTag(holder);
         }
+
         else
         {
             holder = (ViewHolder)view.getTag();

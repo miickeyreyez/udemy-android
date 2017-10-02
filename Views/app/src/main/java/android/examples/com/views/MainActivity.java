@@ -17,7 +17,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button btnBasicListView;
     private Button btnListView;
+    private Button btnBasicGridView;
     private Button btnGridView;
 
     @Override
@@ -26,13 +28,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnListView = (Button) findViewById(R.id.button);
-        btnGridView = (Button) findViewById(R.id.button2);
+        btnBasicListView = (Button) findViewById(R.id.btnBasic);
+        btnListView = (Button) findViewById(R.id.btnList);
+        btnBasicGridView = (Button) findViewById(R.id.btnBasicGrid);
+        btnGridView = (Button) findViewById(R.id.btnGrid);
+
+        btnBasicListView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this,BasicListActivity.class);
+                startActivity(i);
+            }
+        });
 
         btnListView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this,ListActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnBasicGridView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this,BasicGridActivity.class);
                 startActivity(i);
             }
         });
