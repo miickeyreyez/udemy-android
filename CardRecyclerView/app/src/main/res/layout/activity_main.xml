@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btnRecycleList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recycle View - List"
+        android:layout_marginTop="34dp"
+        android:layout_below="@+id/appName"
+        android:layout_alignStart="@+id/appName" />
+
+    <Button
+        android:id="@+id/btnRecycleGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recycle View - Grid"
+        android:layout_alignBaseline="@+id/btnRecycleList"
+        android:layout_alignBottom="@+id/btnRecycleList"
+        android:layout_toEndOf="@+id/btnRecycleList"
+        android:layout_marginStart="13dp" />
+
+    <Button
+        android:id="@+id/btnRecycleStaggedH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recycle View - Grid H"
+        android:layout_alignBaseline="@+id/btnRecycleStaggedV"
+        android:layout_alignBottom="@+id/btnRecycleStaggedV"
+        android:layout_alignStart="@+id/btnRecycleGrid" />
+
+    <Button
+        android:id="@+id/btnRecycleStaggedV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Recycle View - Grid V"
+        android:layout_below="@+id/btnRecycleList"
+        android:layout_toStartOf="@+id/btnRecycleGrid" />
+
+    <Button
+        android:id="@+id/btnCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="Card View"
+        android:layout_below="@+id/btnRecycleStaggedV"
+        android:layout_alignStart="@+id/btnRecycleStaggedV"
+        android:layout_alignEnd="@+id/btnRecycleStaggedV" />
+
+    <Button
+        android:id="@+id/btnJugadores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jugadores"
+        android:layout_alignBaseline="@+id/btnCardView"
+        android:layout_alignBottom="@+id/btnCardView"
+        android:layout_alignStart="@+id/btnRecycleStaggedH"
+        android:layout_alignEnd="@+id/btnRecycleStaggedH" />
+
+    <Button
+        android:id="@+id/btnFrutas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Frutas"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/btnCardView"
+        android:layout_centerHorizontal="true" />
+
+
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="15dp" />
+
+</RelativeLayout>
