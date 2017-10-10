@@ -81,7 +81,8 @@ public class FrutaAdapter extends RecyclerView.Adapter<FrutaAdapter.ViewHolder>
             itemView.setOnCreateContextMenuListener(this);
         }
 
-        public void bind(final Fruta fruta, final OnItemClickListener listener) {
+        public void bind(final Fruta fruta, final OnItemClickListener listener)
+        {
             name.setText(fruta.getName());
             description.setText(fruta.getDescription());
             cantidad.setText("" + fruta.getQuantity());
@@ -95,7 +96,7 @@ public class FrutaAdapter extends RecyclerView.Adapter<FrutaAdapter.ViewHolder>
                 cantidad.setTextColor(ContextCompat.getColor(activity, R.color.colorPrimary));
                 cantidad.setTypeface(null, Typeface.NORMAL);
             }
-            Picasso.with(context).load(fruta.getImgIcon()).fit().into(avatar);
+            Picasso.with(context).load(fruta.getImgBackground()).fit().into(avatar);
             //Seteamos solamente el onClickListener en el avatar
             this.avatar.setOnClickListener(new View.OnClickListener()
                                            {
@@ -111,12 +112,13 @@ public class FrutaAdapter extends RecyclerView.Adapter<FrutaAdapter.ViewHolder>
 
         //Sobre escribimos el onCreateContexMenu
         @Override
-        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo)
+        {
             // Recogemos la posición con el método getAdapterPosition
             Fruta fruta = frutas.get(this.getAdapterPosition());
             // Establecemos título e icono para cada elemento, mirando en sus propiedades
             contextMenu.setHeaderTitle(fruta.getName());
-            contextMenu.setHeaderIcon(fruta.getImgIcon());
+            contextMenu.setHeaderIcon(R.mipmap.ic_launcher);
             // Inflamos el menú
             MenuInflater inflater = activity.getMenuInflater();
             inflater.inflate(R.menu.context_menu_fruit, contextMenu);

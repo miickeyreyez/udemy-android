@@ -108,7 +108,7 @@ public class FruitsActivity extends AppCompatActivity
         {
             case R.id.add_name:
                 int position = frutas.size();
-                frutas.add(position,new Fruta("Mora","Roja/Morada",R.drawable.strawberry_bg,R.mipmap.ic_strawberry,0));
+                frutas.add(position,new Fruta("Mora","Roja/Morada",R.drawable.raspberry_bg,R.mipmap.ic_mora,0));
                 //Notificar el cambio del adaptador, esto optimiza el performance
                 myAdapter.notifyItemInserted(position);
                 //Cuando haga el scroll hay que modificarlo para ver el cambio
