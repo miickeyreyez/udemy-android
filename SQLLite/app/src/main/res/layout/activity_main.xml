@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.udemy.sqlite.MainActivity">
+
+    <TextView
+        android:id="@+id/txtAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_alignBaseline="@+id/btnCreate"
+        android:layout_alignBottom="@+id/btnDelete"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="138dp"
+        android:layout_height="495dp"
+        android:id="@+id/listViewCars"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:layout_below="@+id/btnCreate"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp"
+        android:layout_alignParentEnd="true">
+    </ListView>
+
+    <Button
+        android:id="@+id/btnCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnCreate"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="31dp"
+        android:text="Delete" />
+
+</RelativeLayout>
