@@ -29,12 +29,12 @@ public class Board extends RealmObject
 
     }
 
-    public Board(String title)
+    public Board(String titulo)
     {
-        this.id = MyApplication.boardID.incrementAndGet();
-        this.title = title;
-        this.createdAt = new Date();
-        this.notes = new RealmList<Note>();
+        id = MyApplication.boardID.incrementAndGet();
+        title = titulo;
+        createdAt = new Date();
+        notes = new RealmList<Note>();
     }
 
     public int getId() {

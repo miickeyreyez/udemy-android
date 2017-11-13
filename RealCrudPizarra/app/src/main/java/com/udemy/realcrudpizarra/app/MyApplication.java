@@ -26,17 +26,18 @@ public class MyApplication extends Application
     @Override
     public void onCreate()
     {
+        super.onCreate();
         //Setear la configuración
         setUpRealmConfig();
         Realm realm = Realm.getDefaultInstance();
         //Leer de la base de datos, los max del ID
         boardID = getIDbyTable(realm, Board.class);
         noteID = getIDbyTable(realm, Note.class);
-        super.onCreate();
     }
 
     private void setUpRealmConfig()
     {
+        Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build();
         Realm.setDefaultConfiguration(config);
     }

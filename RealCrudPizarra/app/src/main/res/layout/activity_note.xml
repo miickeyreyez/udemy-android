@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.udemy.realcrudpizarra.MainActivity">
+    tools:context="com.udemy.realcrudpizarra.NoteActivity">
 
     <!--TextView
         android:layout_width="wrap_content"
@@ -13,7 +13,7 @@
         android:id="@+id/textView" /-->
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabNote"
         android:layout_gravity="bottom|end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:src="@android:drawable/ic_menu_add"/>
 
     <ListView
-        android:id="@+id/listViewBoard"
+        android:id="@+id/listViewNote"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
@@ -29,6 +29,5 @@
         android:layout_below="@+id/textView"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp" />
-
 
 </FrameLayout>
