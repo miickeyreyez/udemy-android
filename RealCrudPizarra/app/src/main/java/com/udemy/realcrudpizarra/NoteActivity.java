@@ -1,12 +1,17 @@
 package com.udemy.realcrudpizarra;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -80,6 +85,8 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
             }
         });
 
+        registerForContextMenu(listView);
+
     }
 
     private void showAlertFromCreatingNote(String title, String message)
@@ -124,6 +131,53 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
         builder.create().show();
     }
 
+    private void showAlertForEditNote(String title, String message, final Note note)
+    {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        if(title != null)
+        {
+            builder.setTitle(title);
+        }
+
+        if(message != null)
+        {
+            builder.setMessage(message);
+        }
+
+        View viewInflated = LayoutInflater.from(this).inflate(R.layout.dialog_create_note,null);
+        final EditText input = (EditText) viewInflated.findViewById(R.id.editNote);
+        input.setText(note.getDescription());
+        builder.setView(viewInflated);
+
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String noteName = "";
+
+                if(input.getText().length() > 0)
+                {
+                    noteName = input.getText().toString().trim();
+                }
+
+                if(noteName.equals(note.getDescription()))
+                {
+                    Toast.makeText(getApplicationContext(),"The description is the same to the current description", Toast.LENGTH_SHORT).show();
+                }
+                else if(noteName.length() > 0 && !noteName.equals(note.getDescription()))
+                {
+                    editNote(note,noteName);
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"There are no description for current description", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        builder.create().show();
+    }
+
     public void createNewNote(String note)
     {
         realm.beginTransaction();
@@ -138,4 +192,71 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
     public void onChange(Board board) {
         adapter.notifyDataSetChanged();
     }
+
+    public void editNote(Note note, String noteDescription)
+    {
+        realm.beginTransaction();
+        note.setDescription(noteDescription);
+        realm.copyToRealmOrUpdate(note);
+        realm.commitTransaction();
+    }
+
+    public void deleteNote(Note note)
+    {
+        realm.beginTransaction();
+        note.deleteFromRealm();
+        realm.commitTransaction();
+    }
+
+    public void deleteAll()
+    {
+        realm.beginTransaction();
+        board.getNotes().deleteAllFromRealm();
+        realm.commitTransaction();
+    }
+
+    /*Eventos*/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu_note_activity,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.delete_all_notes:
+                deleteAll();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        getMenuInflater().inflate(R.menu.context_menu_note_activity,menu);
+        //super.onCreateContextMenu(menu,view,menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId())
+        {
+            case R.id.delete_note:
+                deleteNote(notes.get(info.position));
+                return true;
+            case R.id.edit_note:
+                showAlertForEditNote("Edit board","Change board name",notes.get(info.position));
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
 }
