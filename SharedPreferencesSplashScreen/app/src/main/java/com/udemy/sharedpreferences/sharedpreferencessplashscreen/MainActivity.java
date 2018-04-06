@@ -1,6 +1,8 @@
 package com.udemy.sharedpreferences.sharedpreferencessplashscreen;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -21,19 +23,25 @@ public class MainActivity extends AppCompatActivity {
     private EditText contrasenia;
     private Switch recordar;
     private Button login;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
+
         bindUI();
+
+        setCredentialsIfExists();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(login(correo.getText().toString(),contrasenia.getText().toString())){
                     go2Main();
+                    saveOnPreferences(correo.getText().toString(),contrasenia.getText().toString());
                 }
             }
         });
@@ -72,5 +80,34 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,PrincipalActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    private void saveOnPreferences(String email, String password){
+        if(recordar.isChecked()){
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("email",email);
+            editor.putString("password",password);
+            //Pausa el código hasta que acabe
+            //editor.commit();
+            //Este método es asíncrono
+            editor.apply();
+        }
+    }
+
+    private void setCredentialsIfExists(){
+        String mail = getUserMailPrefs();
+        String password = getUserPassPrefs();
+        if(!TextUtils.isEmpty(mail) && !TextUtils.isEmpty(password)){
+            correo.setText(mail);
+            contrasenia.setText(password);
+        }
+    }
+
+    private String getUserMailPrefs(){
+        return prefs.getString("email","");
+    }
+
+    private String getUserPassPrefs(){
+        return prefs.getString("password","");
     }
 }
