@@ -52,6 +52,9 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     private void removeSharedPreferences(){
+        /*SharedPreferences.Editor editor = prefs.edit();
+        editor.remove("email");
+        editor.remove("password");*/
         prefs.edit().clear().apply();
     }
 

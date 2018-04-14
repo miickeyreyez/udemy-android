@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         contrasenia = (EditText)findViewById(R.id.editTextContraseña);
         recordar = (Switch)findViewById(R.id.switchRecordar);
         login = (Button)findViewById(R.id.buttonLogin);
+        recordar.setChecked(true);
     }
 
     private boolean isValidEmail(String correo){
