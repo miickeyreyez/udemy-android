@@ -5,14 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.udemy.fragmentapplication.MainActivity"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <fragment
         android:id="@+id/dataFragment"
         android:name="com.udemy.fragmentapplication.DataFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="35"
         tools:layout="@layout/fragment_data"></fragment>
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.udemy.fragmentapplication.DetailsFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="65"
+        tools:layout="@layout/fragment_details"></fragment>
 
 </LinearLayout>

@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.udemy.fragmentapplication.MainActivity"
-    android:orientation="vertical">
+    tools:context="com.udemy.fragmentapplication.DetailsActivity"
+    android:orientation="horizontal">
 
     <fragment
-        android:id="@+id/dataFragment"
-        android:name="com.udemy.fragmentapplication.DataFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:id="@+id/detailsFragment"
+        android:name="com.udemy.fragmentapplication.DetailsFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        tools:layout="@layout/fragment_data"></fragment>
+        tools:layout="@layout/fragment_details"></fragment>
 
 </LinearLayout>
