@@ -1,0 +1,64 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:orientation="horizontal"
+    tools:context="com.udemy.fragmentmail.DetailsFragment">
+
+    <LinearLayout
+        android:id="@+id/fragmentDetailsMailWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subject: "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewFragmentSubject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Quieres conseguir premio?" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="From: "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewFragmentSenderName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="alejandrofpo@gmail.com" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewFragmentMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Message" />
+
+    </LinearLayout>
+
+</FrameLayout>
