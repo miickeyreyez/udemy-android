@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Udemy - FragmentApplication</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragmentData">Hola desde el fragment data</string>
+    <string name="fragmentDetails">Hola desde el fragment details</string>
+    <string name="send">Enviar</string>
+</resources>
