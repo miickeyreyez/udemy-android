@@ -8,7 +8,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:id="@+id/email_label"
+        android:text="Your email" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabEmail"

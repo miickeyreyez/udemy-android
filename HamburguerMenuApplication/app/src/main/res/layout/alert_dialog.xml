@@ -1,0 +1,38 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".MainActivity"
+    >
+
+    <EditText
+        android:id="@+id/dialog_input_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input your name."
+        android:textSize="15dp"
+        />
+
+    <Button
+        android:id="@+id/dialog_positive_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aceptar"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/dialog_input_text"
+        />
+
+    <Button
+        android:id="@+id/dialog_negative_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:layout_toLeftOf="@id/dialog_positive_btn"
+        android:layout_marginRight="3dp"
+        android:layout_alignBaseline="@id/dialog_positive_btn"
+        />
+
+</RelativeLayout>
