@@ -1,5 +1,7 @@
 package com.udemy.tabby.tabby;
 
+import java.text.MessageFormat;
+
 /**
  * Created by INSPIRON on 26/4/2018.
  */
@@ -29,7 +31,13 @@ public class Country {
         this.countryCode = countryCode;
     }
 
-    public String getFlagUrl(String countryCode){
-        return "htp://www.geognos.com/api/en/countries/fag/" + countryCode + ".png";
+    public String getFlagUrl(){
+        return MessageFormat.format("http://www.geognos.com/api/en/countries/flag/{0}.png",this.getCountryCode());
+
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

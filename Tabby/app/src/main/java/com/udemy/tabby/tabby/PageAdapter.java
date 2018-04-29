@@ -3,6 +3,9 @@ package com.udemy.tabby.tabby;
 import android.support.v4.app.*;
 import android.support.v4.app.ListFragment;
 
+import static com.udemy.tabby.tabby.MainActivity.PERSON_FORM_FRAGMENT;
+import static com.udemy.tabby.tabby.MainActivity.PERSON_LIST_FRAGMENT;
+
 /**
  * Created by INSPIRON on 25/4/2018.
  */
@@ -19,9 +22,9 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position){
-            case 0:
+            case PERSON_FORM_FRAGMENT:
                 return new FormFragment();
-            case 1:
+            case PERSON_LIST_FRAGMENT:
                 return new ListsFragment();
             default:
                 return null;

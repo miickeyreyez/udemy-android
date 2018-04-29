@@ -8,11 +8,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnPersonCreated {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private PageAdapter adapter;
+
+    public static final int PERSON_FORM_FRAGMENT = 0;
+    public static final int PERSON_LIST_FRAGMENT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,4 +61,12 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    public void createPerson(Person person){
+        ListsFragment fragment = (ListsFragment)getSupportFragmentManager().getFragments().get(PERSON_LIST_FRAGMENT);
+        fragment.addPerson(person);
+        viewPager.setCurrentItem(PERSON_LIST_FRAGMENT);
+    }
+
 }
