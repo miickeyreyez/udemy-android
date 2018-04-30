@@ -2,6 +2,7 @@ package com.udemy.maps;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -10,6 +11,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -40,13 +42,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        //Delimitar el zoom en el mapa
+        mMap.setMinZoomPreference(15);
+        mMap.setMaxZoomPreference(18);
+
         // Add a marker in Sydney and move the camera
         //Zoom limit 21
         //Bearing: Orientación hacia el este
         //Tilt es para 3D, límite 90
         LatLng azteca = new LatLng(19.302861  , -99.150528);
         LatLng campNou = new LatLng(41.380896 , 2.12282);
-        mMap.addMarker(new MarkerOptions().position(campNou).title("Camp Nou"));
+        mMap.addMarker(new MarkerOptions().position(campNou).title("Camp Nou").draggable(true));
         mMap.addMarker(new MarkerOptions().position(azteca).title("Azteca"));
 
         CameraPosition camera = new CameraPosition.Builder().target(campNou)
@@ -57,5 +63,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(campNou));
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camera));
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                Toast.makeText(getApplicationContext(),"Lat: " + latLng.latitude + " Lon: " + latLng.longitude,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                Toast.makeText(getApplicationContext(),"Long - Lat: " + latLng.latitude + " Long: " + latLng.longitude,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener(){
+
+            @Override
+            public void onMarkerDragStart(Marker marker) {
+
+            }
+
+            @Override
+            public void onMarkerDrag(Marker marker) {
+
+            }
+
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
+                Toast.makeText(getApplicationContext(),"Marker - Lat: " + marker.getPosition().latitude + " Lon: " + marker.getPosition().longitude,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
