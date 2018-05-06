@@ -48,7 +48,6 @@ public class MapFragment2 extends Fragment implements OnMapReadyCallback, View.O
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,6 +70,7 @@ public class MapFragment2 extends Fragment implements OnMapReadyCallback, View.O
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         this.googleMap = googleMap;
         locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 
@@ -85,31 +85,47 @@ public class MapFragment2 extends Fragment implements OnMapReadyCallback, View.O
             return;
         }
 
-        this.googleMap.setMyLocationEnabled(true);
+        //this.googleMap.setMyLocationEnabled(true);
         //Desactivar botón myLocation
         //this.googleMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-        /*this.googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
-            @Override
-            public boolean onMyLocationButtonClick() {
-                Toast.makeText(getContext(),"Hola",Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });*/
-
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
-
     }
 
     private void zoomToLocation(Location location) {
         cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(location.getLatitude(),location.getLongitude()))
-                .zoom(15)
+                .zoom(2)
                 .bearing(0)
                 .tilt(30)
                 .build();
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    }
+
+    private void createOrUpdateMarkerLocation(Location location) {
+        marker = null;
+        if(marker == null) {
+            marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(),location.getLongitude())).draggable(true));
+        } else {
+            marker.setPosition(new LatLng(location.getLongitude(),location.getLatitude()));
+        }
+        zoomToLocation(location);
+    }
+
+    private void showAlertInfo() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("GPS")
+                .setMessage("GPS desactivado, ¿Desea activarlo?")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 
     private void checkGps() {
@@ -136,35 +152,12 @@ public class MapFragment2 extends Fragment implements OnMapReadyCallback, View.O
                 this.location = location;
                 if(this.location != null) {
                     createOrUpdateMarkerLocation(location);
-                    zoomToLocation(location);
+                    //zoomToLocation(location);
                 }
             }
         } catch (Settings.SettingNotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    private void createOrUpdateMarkerLocation(Location location) {
-        if(marker == null) {
-            marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(),location.getLongitude())).draggable(true));
-        } else {
-            marker.setPosition(new LatLng(location.getLongitude(),location.getLatitude()));
-        }
-    }
-
-    private void showAlertInfo() {
-        new AlertDialog.Builder(getContext())
-                .setTitle("GPS")
-                .setMessage("GPS desactivado, ¿Desea activarlo?")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        startActivity(intent);
-                    }
-                })
-                .setNegativeButton("Cancelar", null)
-                .show();
     }
 
     @Override

@@ -8,8 +8,14 @@
     </item>
 
     <item
-        android:title="Go Map"
-        android:id="@+id/menu_map"
-        app:showAsAction="ifRoom">
+        android:title="Map 1"
+        android:id="@+id/menu_map_1"
+        app:showAsAction="always">
+    </item>
+
+    <item
+        android:title="Map 2"
+        android:id="@+id/menu_map_2"
+        app:showAsAction="always">
     </item>
 </menu>

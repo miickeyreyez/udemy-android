@@ -1,6 +1,5 @@
 package com.udemy.maps;
 
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -111,7 +110,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         googleMap.setOnMarkerDragListener(this);
 
         geocoder = new Geocoder(getContext(), Locale.getDefault());
-
     }
 
     private void checkGps() {

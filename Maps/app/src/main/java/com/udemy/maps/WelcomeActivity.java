@@ -33,8 +33,10 @@ public class WelcomeActivity extends AppCompatActivity {
             case R.id.menu_welcome:
                 currentFragment = new WelcomeFragment();
                 break;
-            case R.id.menu_map:
-                //currentFragment = new MapFragment();
+            case R.id.menu_map_1:
+                currentFragment = new MapFragment();
+                break;
+            case R.id.menu_map_2:
                 currentFragment = new MapFragment2();
                 break;
         }
