@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.udemy.maps.MapFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -9,6 +10,20 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.mapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/colorPrimary"
+        android:clickable="true"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_menu_add"
+        app:borderWidth="0dp" />
 
 </RelativeLayout>

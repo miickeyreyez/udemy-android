@@ -1,23 +1,25 @@
 package com.udemy.maps;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-
+import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -32,7 +34,7 @@ import java.util.Locale;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerDragListener{
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerDragListener, View.OnClickListener{
 
     private View view;
     private GoogleMap googleMap;
@@ -40,6 +42,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private List<Address> address;
     private Geocoder geocoder;
     private MarkerOptions markerOptions;
+    private FloatingActionButton fab;
 
     public MapFragment() {
         // Required empty public constructor
@@ -51,6 +54,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_map, container, false);
+        fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(this);
         return view;
     }
 
@@ -62,6 +67,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             mapView.onResume();
             mapView.getMapAsync(this);
         }
+
+        //this.checkGps();
     }
 
     @Override
@@ -107,9 +114,44 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     }
 
+    private void checkGps() {
+        try {
+            int gpsSignal = Settings.Secure.getInt(getActivity().getContentResolver(),Settings.Secure.LOCATION_MODE);
+            if (gpsSignal == 0) {
+                //GPS desactivado
+                /*Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);*/
+                showAlertInfo();
+            }
+        } catch (Settings.SettingNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showAlertInfo() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("GPS")
+                .setMessage("GPS desactivado, ¿Desea activarlo?")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //checkGps();
+    }
+
     @Override
     public void onMarkerDragStart(Marker marker) {
-
+        marker.hideInfoWindow();
     }
 
     @Override
@@ -138,6 +180,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         String direccion = city + " " + state + " " + country + " " + zipCode;
         marker.setTitle(addressString);
         marker.setSnippet(direccion);
+        marker.showInfoWindow();
         //Toast.makeText(getContext(), direccion ,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View view) {
+        this.checkGps();
     }
 }

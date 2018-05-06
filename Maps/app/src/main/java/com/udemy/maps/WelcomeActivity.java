@@ -34,7 +34,8 @@ public class WelcomeActivity extends AppCompatActivity {
                 currentFragment = new WelcomeFragment();
                 break;
             case R.id.menu_map:
-                currentFragment = new MapFragment();
+                //currentFragment = new MapFragment();
+                currentFragment = new MapFragment2();
                 break;
         }
         changeFragment(currentFragment);
