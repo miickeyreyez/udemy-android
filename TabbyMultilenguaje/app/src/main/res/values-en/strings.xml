@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Udemy - Tabby Multilanguage</string>
+    <string name="form">Form</string>
+    <string name="list">List</string>
+    <string name="name">Name</string>
+    <string name="addPerson">Add person</string>
+    <string name="country">Country</string>
+    <string name="persons">Persons</string>
+    <string name="exit">Exit</string>
+    <string name="spain">Spain</string>
+    <string name="argentina">Argentina</string>
+    <string name="bolivia">Bolivia</string>
+    <string name="chile">Chile</string>
+    <string name="colombia">Colombia</string>
+    <string name="peru">Peru</string>
+    <string name="uruguay">Uruguay</string>
+    <string name="mexico">Mexico</string>
+    <string name="venezuela">Venezuela</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
