@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 recyclerView.setAdapter(partyAdapter);
                 return true;
             case R.id.memory_adapter:
+                checkForPermissionPermission();
                 images.clear();
                 images.addAll(getImagesPath());
                 recyclerView.setAdapter(imagesAdapter);
@@ -141,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
     public List<String> getImagesPath() {
         List<String> listOfAllImages = new ArrayList<String>();
 
-        if (hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        if (hasPermission()) {
             final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
 
             Cursor cursor = getContentResolver()
@@ -160,12 +161,15 @@ public class MainActivity extends AppCompatActivity {
         return listOfAllImages;
     }
 
-    private boolean hasPermission(String readExternalStorage) {
+    private void checkForPermissionPermission() {
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
         if(permissionCheck != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_READ_EXTERNAL_MEMORY);
-            return false;
         }
-        return true;
+    }
+
+    private boolean hasPermission() {
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        return permissionCheck == PackageManager.PERMISSION_GRANTED;
     }
 }

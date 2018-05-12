@@ -36,14 +36,14 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Picasso.get().load(animals[position]).fit().placeholder(R.drawable.spinner).into(holder.image, new Callback() {
+        Picasso.get().load(animals[position]).fit().placeholder(R.drawable.spinner).into(holder.image, new com.squareup.picasso.Callback() {
             @Override
             public void onSuccess() {
                 //holder.image.setVisibility(View.INVISIBLE);
             }
 
             @Override
-            public void onError() {
+            public void onError(Exception e) {
                 Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show();
             }
         });
