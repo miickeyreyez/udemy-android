@@ -1,5 +1,7 @@
 package com.udemy.gsonretrofit;
 
+import com.google.gson.GsonBuilder;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -14,9 +16,14 @@ public class API {
 
     public static Retrofit getApi() {
         if(retrofit == null) {
+
+            /*Esto es solo para la deserializaciòn, el builder.create() tambièn*/
+            GsonBuilder builder = new GsonBuilder();
+            builder.registerTypeAdapter(City.class,new Desearilizer());
+
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(builder.create()))
                     .build();
         }
         return retrofit;

@@ -14,6 +14,11 @@ import java.lang.reflect.Type;
 public class Desearilizer implements JsonDeserializer<City> {
     @Override
     public City deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        return null;
+        int id = json.getAsJsonObject().get("id").getAsInt();
+        String name = json.getAsJsonObject().get("name").getAsString();
+        String country = json.getAsJsonObject().get("sys").getAsJsonObject().get("country").getAsString();
+
+        City city = new City(id, name, country);
+        return  city;
     }
 }
