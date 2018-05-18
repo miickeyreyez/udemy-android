@@ -12,6 +12,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class API {
 
     public static final String BASE_URL = "http://samples.openweathermap.org/data/2.5/";
+    public static final String BASE_ICONS = "http://openweather.org/img/w/";
+    public static final String EXTENSION_ICONS = ".png";
+
     private static Retrofit retrofit = null;
 
     public static Retrofit getApi() {
