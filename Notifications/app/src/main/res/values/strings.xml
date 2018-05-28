@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Udemy - Notifications</string>
+    <string name="titleNotifications">Notification Title</string>
+    <string name="messageNotifications">Notification Message</string>
+    <string name="switchNotificationsOn">High</string>
+    <string name="switchNotificationsOff">Low</string>
+    <string name="buttonNotifications">Send notifications</string>
+</resources>
