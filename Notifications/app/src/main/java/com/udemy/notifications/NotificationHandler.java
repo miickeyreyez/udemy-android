@@ -23,8 +23,10 @@ public class NotificationHandler extends ContextWrapper {
     private NotificationManager notificationManager;
     public static final  String CHANNEL_HIGH_ID = "1";
     public static final  String CHANNEL_LOW_ID = "2";
-    private final  String CHANNEL_HIGH_NAME = "HIGH CHANNEL";
-    private final  String CHANNEL_LOW_NAME = "LOW CHANNEL";
+    private final String CHANNEL_HIGH_NAME = "HIGH CHANNEL";
+    private final String CHANNEL_LOW_NAME = "LOW CHANNEL";
+    private final int SUMMARY_GROUP_ID = 1001;
+    private final String SUMMARY_GROUP_NAME = "GROUPING_NOTIFICATION";
 
     public NotificationHandler(Context base) {
         super(base);
@@ -87,8 +89,9 @@ public class NotificationHandler extends ContextWrapper {
             return new Notification.Builder(getApplicationContext(), channelId)
                     .setContentTitle(title)
                     .setContentText(message)
-                    //.setContentIntent(pendingIntent)
-                    .addAction(action)
+                    .setContentIntent(pendingIntent)
+                    //.addAction(action)
+                    .setGroup(SUMMARY_GROUP_NAME)
                     .setColor(R.color.colorPrimary)
                     .setSmallIcon(android.R.drawable.stat_notify_chat)
                     .setAutoCancel(true);
@@ -108,5 +111,18 @@ public class NotificationHandler extends ContextWrapper {
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(android.R.drawable.stat_notify_chat)
                 .setAutoCancel(true);
+    }
+
+    public void publishNotificationSummaryGroup(boolean isHighImportance) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String channelId = (isHighImportance) ? CHANNEL_HIGH_ID : CHANNEL_LOW_ID;
+            Notification notification = new Notification.Builder(getApplicationContext(),channelId)
+                    .setSmallIcon(android.R.drawable.ic_menu_add)
+                    .setGroup(SUMMARY_GROUP_NAME)
+                    .setGroupSummary(true)
+                    .build();
+
+            getNotificationManager().notify(SUMMARY_GROUP_ID,notification);
+        }
     }
 }
