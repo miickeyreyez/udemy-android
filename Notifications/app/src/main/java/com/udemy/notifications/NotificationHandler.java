@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Icon;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -77,10 +78,17 @@ public class NotificationHandler extends ContextWrapper {
             intent.putExtra("message",message);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+            Notification.Action action = new Notification.Action.Builder(
+                    Icon.createWithResource(this,android.R.drawable.ic_menu_add),
+                    "See details",
+                    pendingIntent).build();
+
             return new Notification.Builder(getApplicationContext(), channelId)
                     .setContentTitle(title)
                     .setContentText(message)
-                    .setContentIntent(pendingIntent)
+                    //.setContentIntent(pendingIntent)
+                    .addAction(action)
                     .setColor(R.color.colorPrimary)
                     .setSmallIcon(android.R.drawable.stat_notify_chat)
                     .setAutoCancel(true);
