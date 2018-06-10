@@ -22,7 +22,7 @@ public class MainGame extends Game {
 	public void create() {
         manager = new AssetManager();
         manager.load("floor.png",Texture.class);
-        manager.load("floor.png",Texture.class);
+        manager.load("overfloor.png",Texture.class);
         manager.load("spike.png",Texture.class);
         manager.load("player.png",Texture.class);
         manager.finishLoading();

@@ -8,6 +8,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by INSPIRON on 9/6/2018.
  */
@@ -17,6 +20,8 @@ public class GameScreen extends  ScreenGame {
     private Stage stage;
     private World world;
     private PlayerEntity player;
+    private List<FloorEntity> floorList = new ArrayList<FloorEntity>();
+    private List<SpikeEntity> spikeList = new ArrayList<SpikeEntity>();
 
     public GameScreen(MainGame game) {
         super(game);
@@ -27,14 +32,33 @@ public class GameScreen extends  ScreenGame {
     @Override
     public void show() {
         Texture playerTexture = game.getManager().get("player.png");
-        player = new PlayerEntity(world, playerTexture, new Vector2(1,2));
+        Texture floorTexture = game.getManager().get("floor.png");
+        Texture overfloorTexture = game.getManager().get("overfloor.png");
+        Texture spikeTexture = game.getManager().get("spike.png");
+        player = new PlayerEntity(world, playerTexture, new Vector2(1.5f,1.5f));
         stage.addActor(player);
+        floorList.add(new FloorEntity(world,floorTexture,overfloorTexture,0,1000,1));
+        spikeList.add(new SpikeEntity(world,spikeTexture,6,1));
+        for(FloorEntity floor : floorList) {
+            stage.addActor(floor);
+        }
+        for(SpikeEntity spike : spikeList) {
+            stage.addActor(spike);
+        }
     }
 
     @Override
     public void hide() {
         player.detach();
         player.remove();
+        for(FloorEntity floor : floorList) {
+            floor.detach();
+            floor.remove();
+        }
+        for(SpikeEntity spike : spikeList) {
+            spike.detach();
+            spike.remove();
+        }
     }
 
     @Override
