@@ -17,6 +17,9 @@ public class MainGame extends Game {
 	private AssetManager manager;
     public GameScreen gameScreen;
     public GameOverScreen gameOverScreen;
+    public MenuScreen menuScreen;
+    public CreditsScreen creditsScreen;
+    public LoadingScreen loadingScreen;
 
     public AssetManager getManager() {
         return manager;
@@ -30,13 +33,21 @@ public class MainGame extends Game {
         manager.load("spike.png",Texture.class);
         manager.load("player.png",Texture.class);
         manager.load("gameover.png",Texture.class);
+        manager.load("logo.png",Texture.class);
         manager.load("song.ogg",Music.class);
         manager.load("die.ogg",Sound.class);
         manager.load("jump.ogg",Sound.class);
-        manager.finishLoading();
+        //manager.finishLoading();
 		//setScreen(new MainGameScreen(this));
+        loadingScreen = new LoadingScreen(this);
+        setScreen(loadingScreen);
+	}
+
+	public void finishLoading() {
+        menuScreen = new MenuScreen(this);
         gameScreen = new GameScreen(this);
         gameOverScreen = new GameOverScreen(this);
-		setScreen(gameOverScreen);
-	}
+        creditsScreen = new CreditsScreen(this);
+        setScreen(menuScreen);
+    }
 }

@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import java.lang.reflect.GenericArrayType;
+
 /**
  * Created by INSPIRON on 10/6/2018.
  */
@@ -20,7 +22,7 @@ public class GameOverScreen extends ScreenGame {
     private Stage stage;
     private Skin skin;
     private Image gameOver;
-    private TextButton retry;
+    private TextButton retry, menu;
 
     public GameOverScreen(final MainGame game) {
         super(game);
@@ -28,10 +30,17 @@ public class GameOverScreen extends ScreenGame {
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         gameOver = new Image(game.getManager().get("gameover.png", Texture.class));
         retry = new TextButton("Retry",skin);
+        menu = new TextButton("Menu",skin);
         retry.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.setScreen(game.gameScreen);
+            }
+        });
+        menu.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(game.menuScreen);
             }
         });
         gameOver.setPosition(320 - gameOver.getWidth()/2, 320-gameOver.getHeight());
