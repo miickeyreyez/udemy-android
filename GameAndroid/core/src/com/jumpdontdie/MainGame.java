@@ -27,11 +27,12 @@ public class MainGame extends Game {
         manager.load("overfloor.png",Texture.class);
         manager.load("spike.png",Texture.class);
         manager.load("player.png",Texture.class);
+        manager.load("gameover.png",Texture.class);
         manager.load("song.ogg",Music.class);
         manager.load("die.ogg",Sound.class);
         manager.load("jump.ogg",Sound.class);
         manager.finishLoading();
 		//setScreen(new MainGameScreen(this));
-		setScreen(new GameScreen(this));
+		setScreen(new GameOverScreen(this));
 	}
 }
