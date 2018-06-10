@@ -12,10 +12,13 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.ws.Action;
 
 /**
  * Created by INSPIRON on 9/6/2018.
@@ -32,7 +35,7 @@ public class GameScreen extends  ScreenGame {
     private Sound jumpSound, dieSound;
     private Music bgMusic;
 
-    public GameScreen(MainGame game) {
+    public GameScreen(final MainGame game) {
         super(game);
         jumpSound = game.getManager().get("jump.ogg");
         dieSound = game.getManager().get("die.ogg");
@@ -64,6 +67,15 @@ public class GameScreen extends  ScreenGame {
                         dieSound.play();
                         bgMusic.stop();
                         player.setAlive(false);
+                        stage.addAction(Actions.sequence(
+                                Actions.delay(1.5f),
+                                Actions.run(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        game.setScreen(game.gameOverScreen);
+                                    }
+                                })
+                        ));
                     }
                 }
             }

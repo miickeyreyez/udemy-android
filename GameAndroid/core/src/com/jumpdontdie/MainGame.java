@@ -15,6 +15,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class MainGame extends Game {
 
 	private AssetManager manager;
+    public GameScreen gameScreen;
+    public GameOverScreen gameOverScreen;
 
     public AssetManager getManager() {
         return manager;
@@ -33,6 +35,8 @@ public class MainGame extends Game {
         manager.load("jump.ogg",Sound.class);
         manager.finishLoading();
 		//setScreen(new MainGameScreen(this));
-		setScreen(new GameOverScreen(this));
+        gameScreen = new GameScreen(this);
+        gameOverScreen = new GameOverScreen(this);
+		setScreen(gameOverScreen);
 	}
 }
