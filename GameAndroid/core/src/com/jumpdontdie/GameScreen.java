@@ -1,6 +1,8 @@
 package com.jumpdontdie;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -27,8 +29,14 @@ public class GameScreen extends  ScreenGame {
     private List<FloorEntity> floorList = new ArrayList<FloorEntity>();
     private List<SpikeEntity> spikeList = new ArrayList<SpikeEntity>();
 
+    private Sound jumpSound, dieSound;
+    private Music bgMusic;
+
     public GameScreen(MainGame game) {
         super(game);
+        jumpSound = game.getManager().get("jump.ogg");
+        dieSound = game.getManager().get("die.ogg");
+        bgMusic = game.getManager().get("song.ogg");
         stage = new Stage(new FitViewport(640,360));
         world = new World(new Vector2(0,-10),true);
         world.setContactListener(new ContactListener() {
@@ -46,11 +54,17 @@ public class GameScreen extends  ScreenGame {
                 if(areCollided(contact,"player", "floor")) {
                     player.setJumping(false);
                     if(Gdx.input.isTouched()) {
+                        jumpSound.play();
                         player.setMustJump(true);
                     }
                 }
                 if(areCollided(contact,"player","spike")) {
-                    player.setAlive(false);
+                    if(player.isAlive()) {
+                        player.setAlive(false);
+                        dieSound.play();
+                        bgMusic.stop();
+                        player.setAlive(false);
+                    }
                 }
             }
 
@@ -80,13 +94,19 @@ public class GameScreen extends  ScreenGame {
         player = new PlayerEntity(world, playerTexture, new Vector2(1.5f,1.5f));
         stage.addActor(player);
         floorList.add(new FloorEntity(world,floorTexture,overfloorTexture,0,1000,1));
-        spikeList.add(new SpikeEntity(world,spikeTexture,6,1));
+        floorList.add(new FloorEntity(world,floorTexture,overfloorTexture,12,10,2));
+        floorList.add(new FloorEntity(world,floorTexture,overfloorTexture,56,10,2));
+        spikeList.add(new SpikeEntity(world,spikeTexture,42,1));
+        spikeList.add(new SpikeEntity(world,spikeTexture,52,1));
+        spikeList.add(new SpikeEntity(world,spikeTexture,18,2));
         for(FloorEntity floor : floorList) {
             stage.addActor(floor);
         }
         for(SpikeEntity spike : spikeList) {
             stage.addActor(spike);
         }
+        bgMusic.setVolume(0.75f);
+        bgMusic.play();
     }
 
     @Override
@@ -107,6 +127,13 @@ public class GameScreen extends  ScreenGame {
     public void render(float delta) {
         Gdx.gl.glClearColor(0.4F,0.5F,0.8F,1F);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if(Gdx.input.justTouched()) {
+            jumpSound.play();
+            player.jump();
+        }
+        if(player.getX() > 150 && player.isAlive()) {
+            stage.getCamera().translate(Constants.PLAYER_SPEED * delta * Constants.PIXELS_IN_METER, 0, 0);
+        }
         stage.act();
         world.step(delta,6,2);
         stage.draw();

@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import static com.jumpdontdie.Constants.IMPULSE_JUMP;
 import static com.jumpdontdie.Constants.PIXELS_IN_METER;
 
 /**
@@ -53,9 +54,6 @@ public class PlayerEntity extends Actor {
     @Override
     public void act(float delta) {
         //Saltar si ha tocado la pantalla
-        if(Gdx.input.justTouched()) {
-            jump();
-        }
         if(mustJump) {
             mustJump = false;
             jump();
@@ -65,13 +63,17 @@ public class PlayerEntity extends Actor {
             float speedY = body.getLinearVelocity().y;
             body.setLinearVelocity(8,speedY);
         }
+
+        if(jumping) {
+            body.applyForceToCenter(0,-IMPULSE_JUMP * 1.15f,true);
+        }
     }
 
-    private void jump() {
+    public void jump() {
         if(!jumping && alive) {
             jumping = true;
             Vector2 position = body.getPosition();
-            body.applyLinearImpulse(0,20,position.x,position.y,true);
+            body.applyLinearImpulse(0, IMPULSE_JUMP,position.x,position.y,true);
         }
     }
 
